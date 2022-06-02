@@ -4,8 +4,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.ysqorz.mybatis.binding.MapperProxyFactory;
+import top.ysqorz.mybatis.binding.MapperRegistry;
 import top.ysqorz.mybatis.dao.IUserDao;
 import top.ysqorz.mybatis.dao.impl.IUserDaoImpl;
+import top.ysqorz.mybatis.session.SqlSession;
+import top.ysqorz.mybatis.session.impl.DefaultSqlSessionFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -23,16 +26,26 @@ public class ApiTest {
 
     @Test
     public void testMapperProxyFactory() {
-        MapperProxyFactory<IUserDao> mapperProxyFactory = new MapperProxyFactory<>(IUserDao.class);
+        // 注册Mapper
+        MapperRegistry mapperRegistry = new MapperRegistry();
+        mapperRegistry.addMappers("top.ysqorz.mybatis.dao");
 
-        // 模拟构建sqlSession
-        Map<String, String> sqlSession = new HashMap<>();
-        sqlSession.put("top.ysqorz.mybatis.dao.IUserDao.queryByUsername", "模拟执行 Mapper.xml 中的SQL语句");
+        // 获取SqlSession
+        DefaultSqlSessionFactory sqlSessionFactory = new DefaultSqlSessionFactory(mapperRegistry);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        IUserDao userDao = mapperProxyFactory.newInstance(sqlSession);
-        log.info("动态代理后：{}", userDao.queryByUsername("ysq"));
+        // 获取代理后的Mapper
+        // SqlSession中持有MapperRegistry，在获取出Mapper的时候，会将当前的SqlSession给Mapper持有
+        IUserDao userDao = sqlSession.getMapper(IUserDao.class);
+
+        // 测试结果
+        String res = userDao.queryByUsername("zhangsan");
+        log.info("测试结果：{}", res);
     }
 
+    /**
+     * 回顾JDK动态代理
+     */
     @Test
     public void testProxyClass() {
         // JDK动态代理，通过反射动态生成代理类和它的实例
