@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ysqorz.mybatis.dao.IUserDao">
+
+    <select id="queryUserById" parameterType="java.lang.String" resultType="top.ysqorz.mybatis.po.User">
+        select id, userId, username, createTime, updateTime
+        from user
+        where userId = #{userId}
+    </select>
+
+</mapper>

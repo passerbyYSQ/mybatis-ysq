@@ -5,5 +5,5 @@ package top.ysqorz.mybatis.dao;
  * @create 2022-06-02 16:26
  */
 public interface IUserDao {
-    String queryByUsername(String username);
+    String queryUserById(String userId);
 }
