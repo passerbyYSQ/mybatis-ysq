@@ -1,6 +1,6 @@
 package top.ysqorz.mybatis.builder;
 
-import top.ysqorz.mybatis.session.Configuration;
+import top.ysqorz.mybatis.config.Configuration;
 
 /**
  * @author passerbyYSQ

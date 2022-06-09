@@ -1,9 +1,11 @@
 package top.ysqorz.mybatis.dao;
 
+import top.ysqorz.mybatis.po.User;
+
 /**
  * @author passerbyYSQ
  * @create 2022-06-02 16:26
  */
 public interface IUserDao {
-    String queryUserById(String userId);
+    User queryUserById(Long id);
 }

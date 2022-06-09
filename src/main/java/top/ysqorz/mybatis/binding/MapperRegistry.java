@@ -1,7 +1,7 @@
 package top.ysqorz.mybatis.binding;
 
 import cn.hutool.core.lang.ClassScanner;
-import top.ysqorz.mybatis.session.Configuration;
+import top.ysqorz.mybatis.config.Configuration;
 import top.ysqorz.mybatis.session.SqlSession;
 
 import java.util.HashMap;

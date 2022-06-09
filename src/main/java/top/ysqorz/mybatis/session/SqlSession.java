@@ -1,5 +1,7 @@
 package top.ysqorz.mybatis.session;
 
+import top.ysqorz.mybatis.config.Configuration;
+
 /**
  * @author passerbyYSQ
  * @create 2022-06-02 21:11

@@ -1,8 +1,6 @@
 package top.ysqorz.mybatis.mapping;
 
-import top.ysqorz.mybatis.session.Configuration;
-
-import java.util.Map;
+import top.ysqorz.mybatis.config.Configuration;
 
 /**
  * Mapper.xml中的SQL语句标签解析之后所对应的实体类
@@ -14,15 +12,12 @@ public class MappedStatement {
     private Configuration config;
     private String id; // TODO 如何标识一个SQL语句标签???
     private SqlCommandType sqlCommandType;
-    private String parameterType;
-    private String resultType;
-    private String sql;
-    private Map<Integer, String> parameters;
+    private BoundSql boundSql;
 
     /**
      * constructor disabled
      */
-    MappedStatement() {
+    private MappedStatement() {
 
     }
 
@@ -32,15 +27,11 @@ public class MappedStatement {
     public static class Builder {
         private MappedStatement mappedStatement = new MappedStatement();
 
-        public Builder(Configuration config, String id, SqlCommandType sqlCommandType,
-                       String parameterType, String resultType, String sql, Map<Integer, String> parameters) {
+        public Builder(Configuration config, String id, SqlCommandType sqlCommandType, BoundSql boundSql) {
             mappedStatement.config = config;
             mappedStatement.id = id;
             mappedStatement.sqlCommandType = sqlCommandType;
-            mappedStatement.parameterType = parameterType;
-            mappedStatement.resultType = resultType;
-            mappedStatement.sql = sql;
-            mappedStatement.parameters = parameters;
+            mappedStatement.boundSql = boundSql;
         }
 
         public MappedStatement build() {
@@ -74,35 +65,11 @@ public class MappedStatement {
         this.sqlCommandType = sqlCommandType;
     }
 
-    public String getParameterType() {
-        return parameterType;
+    public BoundSql getBoundSql() {
+        return boundSql;
     }
 
-    public void setParameterType(String parameterType) {
-        this.parameterType = parameterType;
-    }
-
-    public String getResultType() {
-        return resultType;
-    }
-
-    public void setResultType(String resultType) {
-        this.resultType = resultType;
-    }
-
-    public String getSql() {
-        return sql;
-    }
-
-    public void setSql(String sql) {
-        this.sql = sql;
-    }
-
-    public Map<Integer, String> getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(Map<Integer, String> parameters) {
-        this.parameters = parameters;
+    public void setBoundSql(BoundSql boundSql) {
+        this.boundSql = boundSql;
     }
 }

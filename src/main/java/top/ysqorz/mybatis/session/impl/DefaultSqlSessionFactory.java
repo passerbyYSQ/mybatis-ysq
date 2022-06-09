@@ -1,6 +1,6 @@
 package top.ysqorz.mybatis.session.impl;
 
-import top.ysqorz.mybatis.session.Configuration;
+import top.ysqorz.mybatis.config.Configuration;
 import top.ysqorz.mybatis.session.SqlSession;
 import top.ysqorz.mybatis.session.SqlSessionFactory;
 

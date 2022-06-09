@@ -1,10 +1,12 @@
 package top.ysqorz.mybatis;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.ysqorz.mybatis.dao.IUserDao;
 import top.ysqorz.mybatis.dao.impl.IUserDaoImpl;
+import top.ysqorz.mybatis.po.User;
 import top.ysqorz.mybatis.session.SqlSession;
 import top.ysqorz.mybatis.session.SqlSessionFactory;
 import top.ysqorz.mybatis.session.impl.SqlSessionFactoryBuilder;
@@ -34,8 +36,8 @@ public class ApiTest {
         // 获取代理后的Dao
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
         // 测试
-        String res = userDao.queryUserById("1001");
-        log.info("测试结果：{}", res);
+        User user = userDao.queryUserById(1L);
+        log.info("测试结果：{}", JSON.toJSONString(user));
     }
 
     /**
@@ -51,7 +53,7 @@ public class ApiTest {
                 userDaoImpl.getClass().getInterfaces(), // 被代理类所实现的接口
                 myHandler
         );
-        log.info("动态代理后：{}", userDao.queryUserById("ysq"));
+        log.info("动态代理后：{}", userDao.queryUserById(1L));
     }
 
     static class MyHandler implements InvocationHandler {

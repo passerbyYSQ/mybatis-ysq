@@ -1,7 +1,8 @@
-package top.ysqorz.mybatis.session;
+package top.ysqorz.mybatis.config;
 
 import top.ysqorz.mybatis.binding.MapperRegistry;
 import top.ysqorz.mybatis.mapping.MappedStatement;
+import top.ysqorz.mybatis.session.SqlSession;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +16,10 @@ import java.util.Map;
 public class Configuration {
 
     protected MapperRegistry mapperRegistry = new MapperRegistry(this);
-
+    // 映射的SQL语句
     protected final Map<String, MappedStatement> mappedStatements = new HashMap<>();
+    protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
+    protected Environment environment;
 
     public void addMappers(String packageName) {
         mapperRegistry.addMappers(packageName);
@@ -40,5 +43,17 @@ public class Configuration {
 
     public MappedStatement getMappedStatement(String id) {
         return mappedStatements.get(id);
+    }
+
+    public Class<?> getClassByAlias(String alias) {
+        return typeAliasRegistry.resolveAlias(alias);
+    }
+
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }

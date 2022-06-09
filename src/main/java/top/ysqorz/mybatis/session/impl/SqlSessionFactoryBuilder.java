@@ -1,7 +1,7 @@
 package top.ysqorz.mybatis.session.impl;
 
 import top.ysqorz.mybatis.builder.xml.XMLConfigBuilder;
-import top.ysqorz.mybatis.session.Configuration;
+import top.ysqorz.mybatis.config.Configuration;
 import top.ysqorz.mybatis.session.SqlSessionFactory;
 
 import java.io.Reader;
